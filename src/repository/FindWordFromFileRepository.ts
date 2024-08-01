@@ -1,8 +1,9 @@
-import { WordModel } from "../model/WordModel";
+import { FileManager } from "./FileManager";
 import { IFindWordRepository } from "./IFindWordRepository";
 
 export class FindWordFromFileRepository implements IFindWordRepository {
-    async find(fileName: string): Promise<WordModel> {
-        throw new Error("Method not implemented.");
-    }
+  async find(fileName: string): Promise<string> {
+    const fileManager: FileManager = FileManager.getInstance();
+    return await fileManager.readFile(fileName);
+  }
 }

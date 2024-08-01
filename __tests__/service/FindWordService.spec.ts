@@ -1,32 +1,36 @@
 import { WordModel } from "../../src/model/WordModel";
+import { FindWordFromFileRepository } from "../../src/repository/FindWordFromFileRepository";
 import { IFindWordRepository } from "../../src/repository/IFindWordRepository";
 import { FindWordService } from "../../src/service/FindWordService";
-import { IFindWordService } from "../../src/service/IFindWordService";
+import { WordCounterService } from "../../src/service/WordCounterService";
 
 jest.mock("../../src/repository/FindWordFromFileRepository");
+jest.mock("../../src/service/WordCounterService");
 
 describe("FindWordService", () => {
-  let findWordService: IFindWordService;
-  let findWordRepository: jest.Mocked<IFindWordRepository>;
-
-  const fileName = "test";
+  let service: FindWordService;
+  let mockWordCounterService: jest.Mocked<WordCounterService>;
+  let mockFindWordRepository: jest.Mocked<IFindWordRepository>;
 
   beforeEach(() => {
-    findWordService = new FindWordService();
+    service = new FindWordService();
 
-    findWordRepository = {
-      find: jest.fn(),
-    };
+    mockFindWordRepository =
+      new FindWordFromFileRepository() as jest.Mocked<IFindWordRepository>;
+    mockWordCounterService =
+      new WordCounterService() as jest.Mocked<WordCounterService>;
+
+    service.findWordRepository = mockFindWordRepository;
+    service.wordCounterService = mockWordCounterService;
   });
 
-  it("should find word from file", async () => {
-    // given
-    const mockResult: WordModel = await findWordRepository.find(fileName);
+  it("should return word model from file content", async () => {
+    const fileName = "testFile.txt";
+    const mockWordEntity = await mockFindWordRepository.find(fileName);
+    const mockWordModel = mockWordCounterService.counter(mockWordEntity);
 
-    // when
-    const result = await findWordRepository.find(fileName);
+    const result: WordModel = await service.find(fileName);
 
-    // then
-    expect(result).toEqual(mockResult);
+    expect(result).toEqual(mockWordModel);
   });
 });
