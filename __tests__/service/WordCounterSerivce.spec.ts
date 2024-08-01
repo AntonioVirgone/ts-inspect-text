@@ -3,21 +3,27 @@ import { IWordCounterService } from "../../src/service/IWordCounterService";
 import { WordCounterService } from "../../src/service/WordCounterService";
 
 describe("WordCounterService", () => {
-    let service: IWordCounterService;
-  
-    beforeEach(() => {
-      service = new WordCounterService();
-    });
-  
-    it('should return word model from file content', async () => {
-      const mockContent = 'abc def, .ghi\n lmnopqrstuvz';
-  
-      const result: WordModel = service.counter(mockContent);
-  
-      expect(result.totalWord).toBe(4); // Adjust these numbers based on your mock content
-      expect(result.totalSpace).toBe(3);
-      expect(result.totalLetter).toBe(18); // Count vowels in mockContent
-      expect(result.mostRepeatedWord).toEqual(['lmnopqrstuvz']);
-    });
+  let service: IWordCounterService;
+
+  beforeEach(() => {
+    service = new WordCounterService();
   });
-  
+
+  it("should return word model from file content", async () => {
+    const mockContent =
+      "hello world\nciao mondo  dd\t\t\nabc abc abc abc abc abc abc abc abc ciao mondo ciao mondo ciao mondo ciao mondo ciao mondo ciao mondo ciao mondo ciao mondo ciao mondo ciao mondo abc";
+
+    const result: WordModel = service.counter(mockContent);
+
+    expect(result.totalWord).toBe(35);
+    expect(result.totalSpace).toBe(37);
+    expect(result.totalLetter).toBe(141);
+    expect(result.mostRepeatedWord).toEqual(
+      expect.arrayContaining([
+        { word: "abc", repetitions: 10 },
+        { word: "ciao", repetitions: 11 },
+        { word: "mondo", repetitions: 11 },
+      ])
+    );
+  });
+});

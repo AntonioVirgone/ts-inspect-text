@@ -13,7 +13,7 @@ export class FindWordController implements IFindWordController {
     res: Response,
     next: NextFunction
   ) {
-    const { fileName } = req.params;
+    const fileName  = req.params.fileName;
     const result = await this.findWordService.find(fileName);
     res.status(200).json(result);
   }
