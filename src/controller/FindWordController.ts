@@ -14,7 +14,11 @@ export class FindWordController implements IFindWordController {
     next: NextFunction
   ) {
     const fileName  = req.params.fileName;
-    const result = await this.findWordService.find(fileName);
-    res.status(200).json(result);
+    try {
+      const result = await this.findWordService.find(fileName);
+      res.status(200).json(result);  
+    } catch (error) {
+      res.status(404).json({ status: 404, message: `File ${fileName} not found`})
+    }
   }
 }

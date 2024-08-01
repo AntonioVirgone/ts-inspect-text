@@ -15,8 +15,12 @@ export class FileManager {
   }
 
   public async readFile(fileName: string): Promise<string> {
-    const filePath = `${path.join(__dirname, ROUTE_FILE)}/${fileName}.txt`;
-    return await fs.readFile(filePath, "utf-8");
+    try {
+      const filePath = `${path.join(__dirname, ROUTE_FILE)}/${fileName}.txt`;
+      return await fs.readFile(filePath, "utf-8");  
+    } catch (error) {
+      throw new Error("File not found");
+    }
   }
 
   public async writeFile(fileName: string, content: string): Promise<void> {

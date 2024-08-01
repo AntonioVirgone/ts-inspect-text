@@ -36,17 +36,13 @@ describe("FindWordController", () => {
     const mockResult: WordModel = await findWordService.find(fileName);
     req = {
       params: {
-        fileName: "some file name",
+        fileName: fileName,
       },
       headers: { "x-service-token": X_SERVICE_TOKEN },
     };
 
     // when
-    const result = await findWordController.find(
-      req as Request,
-      res as Response,
-      next
-    );
+    await findWordController.find(req as Request, res as Response, next);
 
     // then
     expect(res.status).toHaveBeenCalledWith(200);
@@ -55,20 +51,15 @@ describe("FindWordController", () => {
 
   it("should token is not valid", async () => {
     // given
-    const mockResult: WordModel = await findWordService.find(fileName);
     req = {
       params: {
-        fileName: "some file name",
+        fileName: fileName,
       },
       headers: { "x-service-token": "token not valid" },
     };
 
     // when
-    const result = await findWordController.find(
-      req as Request,
-      res as Response,
-      next
-    );
+    await findWordController.find(req as Request, res as Response, next);
 
     // then
     expect(res.status).toHaveBeenCalledWith(401);
