@@ -1,4 +1,4 @@
-type WordModel = {
+export type WordModel = {
     totalWord: number,
     totalLetter: number,
     totalSpace: number,
