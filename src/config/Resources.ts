@@ -1,1 +1,1 @@
-export const ROUTE_FILE = "../../../resources";
+export const ROUTE_FILE = "../../resources";

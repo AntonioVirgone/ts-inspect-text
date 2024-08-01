@@ -3,7 +3,6 @@ import { IFindWordController } from "./IFindWordController";
 import { Auth } from "../decorator/Auth";
 import { IFindWordService } from "../service/IFindWordService";
 import { FindWordService } from "../service/FindWordService";
-import { WordModel } from "../model/WordModel";
 
 export class FindWordController implements IFindWordController {
   findWordService: IFindWordService = new FindWordService();
@@ -13,8 +12,9 @@ export class FindWordController implements IFindWordController {
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<WordModel> {
+  ) {
     const { fileName } = req.params;
-    return await this.findWordService.find(fileName);
+    const result = await this.findWordService.find(fileName);
+    res.status(200).json(result);
   }
 }

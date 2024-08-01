@@ -3,7 +3,7 @@ import { IFindWordController } from "./controller/IFindWordController";
 import { FindWordController } from "./controller/FindWordController";
 
 const app = express();
-const port = 3010;
+const port = 3000;
 app.use(express.json());
 
 const findWordController: IFindWordController = new FindWordController();

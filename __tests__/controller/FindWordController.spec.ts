@@ -49,7 +49,9 @@ describe("FindWordController", () => {
     );
 
     // then
-    expect(result).toEqual(mockResult);
+    // then
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith(mockResult);
   });
 
   it("should token is not valid", async () => {
