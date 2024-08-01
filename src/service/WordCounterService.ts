@@ -1,34 +1,17 @@
 import { WordModel } from "../model/WordModel";
+import { IWordCounterService } from "./IWordCounterService";
 
-export class WordCounterService {
+export class WordCounterService implements IWordCounterService {
   counter(text: string): WordModel {
-    let emptySpaceCounter = 0;
-    let letterCounter = 0;
-    let mostRepeatedWord: string[] = [];
-
-    const vowels: string[] = ["a", "i", "e", "o", "u"];
-
-    for (let i: number = 0; i < text.length; i++) {
-      const word = text.charAt(i);
-      if (text.charAt(i) === " ") {
-        emptySpaceCounter++;
-      } else if (!vowels.includes(word)) {
-        letterCounter++;
-      }
-    }
-
-    const textSplit = text.split(" ");
-    let totalWord = textSplit.length;
-    for (let i = 0; i < totalWord; i++) {
-      if (textSplit[i].length >= 10) {
-        mostRepeatedWord.push(textSplit[i]);
-      }
-    }
+    const emptySpaceCounter = text.search(" ");
+    const letterCounter = text.match(/[^aeiouAEIOU\s]/g);
+    const textSplit = text.split(/[.,:;\s]/g).filter(str => str.trim() !== '');
+    const mostRepeatedWord: string[] = textSplit.filter(str => str.length > 10);
 
     return {
-      totalWord: totalWord,
+      totalWord: textSplit.length,
       totalSpace: emptySpaceCounter,
-      totalLetter: letterCounter,
+      totalLetter: letterCounter != null ? letterCounter.length : 0,
       mostRepeatedWord: mostRepeatedWord,
     };
   }

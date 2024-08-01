@@ -49,7 +49,6 @@ describe("FindWordController", () => {
     );
 
     // then
-    // then
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith(mockResult);
   });
