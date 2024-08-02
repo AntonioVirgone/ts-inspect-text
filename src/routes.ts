@@ -50,27 +50,4 @@ router.get(
   }
 );
 
-/**
- * @swagger
- * /users:
- *   post:
- *     summary: Crea un nuovo utente
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *     responses:
- *       201:
- *         description: Utente creato
- */
-router.post("/users", (req: Request, res: Response) => {
-  const newUser = { id: 3, name: req.body.name };
-  res.status(201).json(newUser);
-});
-
 export default router;
