@@ -1,6 +1,6 @@
 {
   "name": "userbot",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -14,6 +14,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "axios": "^1.7.3",
     "express": "^4.19.2",
     "jest-mock-extended": "^3.0.7",
     "swagger-jsdoc": "^6.2.8",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@nestjs/testing": "^10.3.10",
+    "@types/axios": "^0.14.0",
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.0.2",

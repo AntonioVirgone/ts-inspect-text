@@ -12,6 +12,7 @@ describe("FindWordController", () => {
   let findWordService: jest.Mocked<IFindWordService>;
 
   const fileName = "test";
+  const externalPath = "www.test.com"
   let req: Partial<Request>;
   let res: Partial<Response>;
   let next: NextFunction;
@@ -21,6 +22,7 @@ describe("FindWordController", () => {
 
     findWordService = {
       find: jest.fn(),
+      findExternal: jest.fn(),
     };
 
     res = {
@@ -49,7 +51,7 @@ describe("FindWordController", () => {
     expect(res.json).toHaveBeenCalledWith(mockResult);
   });
 
-  it("should token is not valid", async () => {
+  it("should failed find because token is not valid", async () => {
     // given
     req = {
       params: {
@@ -60,6 +62,44 @@ describe("FindWordController", () => {
 
     // when
     await findWordController.find(req as Request, res as Response, next);
+
+    // then
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(res.json).toHaveBeenCalledWith({
+      status: 401,
+      message: "Token not valid",
+    });
+  });
+
+  it("should find word by external web page", async () => {
+    // given
+    const mockResult: WordModel = await findWordService.findExternal(externalPath);
+    req = {
+      query: {
+        path: externalPath,
+      },
+      headers: { "x-service-token": X_SERVICE_TOKEN },
+    };
+
+    // when
+    await findWordController.findExternal(req as Request, res as Response, next);
+
+    // then
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith(mockResult);
+  });
+
+  it("should failed find on web page because token is not valid", async () => {
+    // given
+    req = {
+      params: {
+        fileName: fileName,
+      },
+      headers: { "x-service-token": "token not valid" },
+    };
+
+    // when
+    await findWordController.findExternal(req as Request, res as Response, next);
 
     // then
     expect(res.status).toHaveBeenCalledWith(401);

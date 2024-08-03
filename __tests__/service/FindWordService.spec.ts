@@ -5,6 +5,7 @@ import { IFindWordService } from "../../src/service/IFindWordService";
 import { IWordCounterService } from "../../src/service/IWordCounterService";
 
 jest.mock("../../src/repository/FindWordFromFileRepository");
+jest.mock("../../src/repository/FindWordFromPathRepository");
 jest.mock("../../src/service/WordCounterService");
 
 describe("FindWordService", () => {
@@ -32,6 +33,19 @@ describe("FindWordService", () => {
 
     // when
     const result: WordModel = await service.find(fileName);
+
+    // then
+    expect(result).toEqual(mockWordModel);
+  });
+
+  it("should return word model from file content", async () => {
+    // given
+    const externalPath = "www.txt.com";
+    const mockWordEntity = await mockFindWordRepository.find(externalPath);
+    const mockWordModel = mockWordCounterService.counter(mockWordEntity);
+
+    // when
+    const result: WordModel = await service.findExternal(externalPath);
 
     // then
     expect(result).toEqual(mockWordModel);
