@@ -34,7 +34,12 @@ Ho creato un decorator per gestire la verifica del token passato come header nel
 
 ### Istruzioni
 
-1. Su terminale eseguire il comando 
+### Istruzioni
+
+1. Clona il repository
+   ```sh
+   git clone https://github.com/username/repository.git
+2. Su terminale eseguire il comando 
    ```sh
    docker-compose up --build
    ```
