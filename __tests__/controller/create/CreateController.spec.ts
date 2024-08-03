@@ -61,7 +61,7 @@ describe("CreateController", () => {
       params: {
         fileName: fileName,
       },
-      headers: { "x-service-token": X_SERVICE_TOKEN },
+      headers: { "x-service-token": "token not valid" },
     };
 
     // when
