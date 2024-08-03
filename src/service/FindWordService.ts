@@ -1,5 +1,6 @@
 import { WordModel } from "../model/WordModel";
 import { FindWordFromFileRepository } from "../repository/FindWordFromFileRepository";
+import { FindWordFromPathRepository } from "../repository/FindWordFromPathRepository";
 import { IFindWordRepository } from "../repository/IFindWordRepository";
 import { IFindWordService } from "./IFindWordService";
 import { WordCounterService } from "./WordCounterService";
@@ -11,6 +12,12 @@ export class FindWordService implements IFindWordService {
   async find(fileName: string): Promise<WordModel> {
     this.findWordRepository = new FindWordFromFileRepository();
     const wordEntity: string = await this.findWordRepository.find(fileName);
+    return this.wordCounterService.counter(wordEntity);
+  }
+
+  async findExternal(externalPath: string): Promise<WordModel> {
+    this.findWordRepository = new FindWordFromPathRepository();
+    const wordEntity: string = await this.findWordRepository.find(externalPath);
     return this.wordCounterService.counter(wordEntity);
   }
 }
