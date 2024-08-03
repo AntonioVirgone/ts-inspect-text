@@ -160,8 +160,8 @@ router.get(
  *                  message:
  *                    type: string
  */
-router.get(
-  '/api/v1/read/words',
+router.post(
+  '/api/v1/create/:fileName',
   async (req: Request, res: Response, next: NextFunction) => {
     createController.create(req, res, next);
   }
