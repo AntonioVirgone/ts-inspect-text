@@ -1,4 +1,4 @@
-import { WordModel, WordRepetedModel } from "../model/WordModel";
+import { WordModel, WordRepetedModel } from "../../model/WordModel";
 import { IWordCounterService } from "./IWordCounterService";
 
 export class WordCounterService implements IWordCounterService {

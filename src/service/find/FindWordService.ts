@@ -1,7 +1,7 @@
-import { WordModel } from "../model/WordModel";
-import { FindWordFromFileRepository } from "../repository/FindWordFromFileRepository";
-import { FindWordFromPathRepository } from "../repository/FindWordFromPathRepository";
-import { IFindWordRepository } from "../repository/IFindWordRepository";
+import { WordModel } from "../../model/WordModel";
+import { FindWordFromFileRepository } from "../../repository/FindWordFromFileRepository";
+import { FindWordFromPathRepository } from "../../repository/FindWordFromPathRepository";
+import { IFindWordRepository } from "../../repository/IFindWordRepository";
 import { IFindWordService } from "./IFindWordService";
 import { WordCounterService } from "./WordCounterService";
 

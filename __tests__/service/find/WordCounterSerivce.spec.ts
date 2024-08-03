@@ -1,6 +1,6 @@
-import { WordModel } from "../../src/model/WordModel";
-import { IWordCounterService } from "../../src/service/IWordCounterService";
-import { WordCounterService } from "../../src/service/WordCounterService";
+import { WordModel } from "../../../src/model/WordModel";
+import { IWordCounterService } from "../../../src/service/find/IWordCounterService";
+import { WordCounterService } from "../../../src/service/find/WordCounterService";
 
 describe("WordCounterService", () => {
   let service: IWordCounterService;

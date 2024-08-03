@@ -1,12 +1,12 @@
-import { WordModel } from "../../src/model/WordModel";
-import { IFindWordRepository } from "../../src/repository/IFindWordRepository";
-import { FindWordService } from "../../src/service/FindWordService";
-import { IFindWordService } from "../../src/service/IFindWordService";
-import { IWordCounterService } from "../../src/service/IWordCounterService";
+import { WordModel } from "../../../src/model/WordModel";
+import { IFindWordRepository } from "../../../src/repository/IFindWordRepository";
+import { FindWordService } from "../../../src/service/find/FindWordService";
+import { IFindWordService } from "../../../src/service/find/IFindWordService";
+import { IWordCounterService } from "../../../src/service/find/IWordCounterService";
 
-jest.mock("../../src/repository/FindWordFromFileRepository");
-jest.mock("../../src/repository/FindWordFromPathRepository");
-jest.mock("../../src/service/WordCounterService");
+jest.mock("../../../src/repository/FindWordFromFileRepository");
+jest.mock("../../../src/repository/FindWordFromPathRepository");
+jest.mock("../../../src/service/find/WordCounterService");
 
 describe("FindWordService", () => {
   let service: IFindWordService;
