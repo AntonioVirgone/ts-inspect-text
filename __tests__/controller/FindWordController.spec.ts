@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import { FindWordController } from "../../src/controller/FindWordController";
+import { FindWordController } from "../../src/controller/find/FindWordController";
 import { WordModel } from "../../src/model/WordModel";
 import { X_SERVICE_TOKEN } from "../../src/config/Secrets";
 import { IFindWordService } from "../../src/service/IFindWordService";
-import { IFindWordController } from "../../src/controller/IFindWordController";
+import { IFindWordController } from "../../src/controller/find/IFindWordController";
 
 jest.mock("../../src/service/FindWordService");
 
