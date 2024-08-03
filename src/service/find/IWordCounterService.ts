@@ -1,4 +1,4 @@
-import { WordModel } from "../model/WordModel";
+import { WordModel } from "../../model/WordModel";
 
 export interface IWordCounterService {
     counter(text: string): WordModel;

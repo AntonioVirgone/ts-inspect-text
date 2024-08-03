@@ -1,5 +1,5 @@
-import { FileManager } from "./FileManager";
-import { IFindWordRepository } from "./IFindWordRepository";
+import { FileManager } from "../FileManager";
+import { IFindWordRepository } from "../find/IFindWordRepository";
 
 export class FindWordFromFileRepository implements IFindWordRepository {
   async find(fileName: string): Promise<string> {

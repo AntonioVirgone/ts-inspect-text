@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { IFindWordController } from "./IFindWordController";
-import { Auth } from "../decorator/Auth";
-import { IFindWordService } from "../service/IFindWordService";
-import { FindWordService } from "../service/FindWordService";
+import { Auth } from "../../decorator/Auth";
+import { FindWordService } from "../../service/find/FindWordService";
+import { IFindWordService } from "../../service/find/IFindWordService";
 
 export class FindWordController implements IFindWordController {
   findWordService: IFindWordService = new FindWordService();

@@ -1,11 +1,13 @@
 // src/routes.ts
 import { Router, Request, Response, NextFunction } from "express";
-import { IFindWordController } from "./controller/IFindWordController";
-import { FindWordController } from "./controller/FindWordController";
+import { IFindWordController } from "./controller/find/IFindWordController";
+import { FindWordController } from "./controller/find/FindWordController";
+import { ICreateController } from "./controller/create/ICreateController";
+import { CreateController } from "./controller/create/CreateController";
 
 const router = Router();
 const findWordController: IFindWordController = new FindWordController();
-
+const createController: ICreateController = new CreateController();
 /**
  * @swagger
  * /api/v1/read/{fileName}/words:
@@ -113,6 +115,55 @@ router.get(
   '/api/v1/read/words',
   async (req: Request, res: Response, next: NextFunction) => {
     findWordController.findExternal(req, res, next);
+  }
+);
+
+/**
+ * @swagger
+ * /api/v1/create/{fileName}:
+ *   post:
+ *     summary: Permette di creare un file con all'interno il contenuto passato tramite request body
+ *     parameters:
+ *       - in: header
+ *         name: x-service-token
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Token di autenticazione
+ *       - in: path
+ *         name: fileName
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Nome del file
+ *     requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *             type: object
+ *             properties:
+ *               content:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Success
+ *       401:
+ *         description: Failure
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  status:
+ *                    type: integer
+ *                  message:
+ *                    type: string
+ */
+router.post(
+  '/api/v1/create/:fileName',
+  async (req: Request, res: Response, next: NextFunction) => {
+    createController.create(req, res, next);
   }
 );
 

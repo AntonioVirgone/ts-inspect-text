@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { FindWordController } from "../../src/controller/FindWordController";
-import { WordModel } from "../../src/model/WordModel";
-import { X_SERVICE_TOKEN } from "../../src/config/Secrets";
-import { IFindWordService } from "../../src/service/IFindWordService";
-import { IFindWordController } from "../../src/controller/IFindWordController";
+import { FindWordController } from "../../../src/controller/find/FindWordController";
+import { WordModel } from "../../../src/model/WordModel";
+import { X_SERVICE_TOKEN } from "../../../src/config/Secrets";
+import { IFindWordService } from "../../../src/service/find/IFindWordService";
+import { IFindWordController } from "../../../src/controller/find/IFindWordController";
 
-jest.mock("../../src/service/FindWordService");
+jest.mock("../../../src/service/find/FindWordService");
 
 describe("FindWordController", () => {
   let findWordController: IFindWordController;
@@ -33,7 +33,7 @@ describe("FindWordController", () => {
     next = jest.fn();
   });
 
-  it("should find word in text", async () => {
+  it("should use service to find word in text", async () => {
     // given
     const mockResult: WordModel = await findWordService.find(fileName);
     req = {
@@ -71,7 +71,7 @@ describe("FindWordController", () => {
     });
   });
 
-  it("should find word by external web page", async () => {
+  it("should use service to find word by external web page", async () => {
     // given
     const mockResult: WordModel = await findWordService.findExternal(externalPath);
     req = {
