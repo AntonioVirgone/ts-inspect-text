@@ -53,4 +53,25 @@ describe("CreateController", () => {
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith(undefined);
   });
+
+
+  it("should failed find because token is not valid", async () => {
+    // given
+    req = {
+      params: {
+        fileName: fileName,
+      },
+      headers: { "x-service-token": X_SERVICE_TOKEN },
+    };
+
+    // when
+    await createController.create(req as Request, res as Response, next);
+
+    // then
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(res.json).toHaveBeenCalledWith({
+      status: 401,
+      message: "Token not valid",
+    });
+  });
 });
