@@ -1,6 +1,6 @@
 import axios from "axios";
-import { IFindWordRepository } from "../../src/repository/IFindWordRepository";
-import { FindWordFromPathRepository } from "../../src/repository/FindWordFromPathRepository";
+import { IFindWordRepository } from "../../../src/repository/find/IFindWordRepository";
+import { FindWordFromPathRepository } from "../../../src/repository/find/FindWordFromPathRepository";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;

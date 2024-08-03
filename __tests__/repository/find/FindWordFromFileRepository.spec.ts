@@ -1,8 +1,8 @@
-import { IFindWordRepository } from "../../src/repository/IFindWordRepository";
-import { FileManager } from "../../src/repository/FileManager";
-import { FindWordFromFileRepository } from "../../src/repository/FindWordFromFileRepository";
+import { IFindWordRepository } from "../../../src/repository/find/IFindWordRepository";
+import { FileManager } from "../../../src/repository/FileManager";
+import { FindWordFromFileRepository } from "../../../src/repository/find/FindWordFromFileRepository";
 
-jest.mock("../../src/repository/FileManager", () => {
+jest.mock("../../../src/repository/FileManager", () => {
     return {
         FileManager: {
             getInstance: jest.fn()
